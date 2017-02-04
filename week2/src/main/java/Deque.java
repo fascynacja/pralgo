@@ -34,7 +34,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     public void addFirst(Item item) {
         nullCheck(item);
-        Node<Item> newNode = new Node(item);
+        Node<Item> newNode = new Node<>(item);
         newNode.next = first;
         if (!isEmpty()) {
             first.previous = newNode;
@@ -49,9 +49,9 @@ public class Deque<Item> implements Iterable<Item> {
     public void addLast(Item item) {
         nullCheck(item);
 
-        Node<Item> newNode = new Node(item);
+        Node<Item> newNode = new Node<>(item);
         newNode.previous = last;
-        Node oldLast = last;
+        Node<Item> oldLast = last;
         if (!isEmpty()) {
             oldLast.next = newNode;
         } else {
@@ -65,7 +65,7 @@ public class Deque<Item> implements Iterable<Item> {
         checkNotEmpty();
         Item item = first.item;
 
-        Node newFirst = first.next;
+        Node<Item> newFirst = first.next;
         first.next = null;
 
         first = newFirst;
@@ -82,10 +82,10 @@ public class Deque<Item> implements Iterable<Item> {
     public Item removeLast() {
         checkNotEmpty();
         Item item = last.item;
-        Node newLast = last.previous;
+        Node<Item> newLast = last.previous;
         last.previous = null;
         last = newLast;
-        if (newLast!=null) {
+        if (newLast != null) {
             newLast.next = null;
         } else {
             first = null;
@@ -142,19 +142,17 @@ public class Deque<Item> implements Iterable<Item> {
         }
         if (n == 0) {
             if (first != null) return false;
-        }
-        else if (n == 1) {
-            if (first == null)      return false;
+        } else if (n == 1) {
+            if (first == null) return false;
             if (first.next != null) return false;
-        }
-        else {
-            if (first == null)      return false;
+        } else {
+            if (first == null) return false;
             if (first.next == null) return false;
         }
 
         // check internal consistency of instance variable n
         int numberOfNodes = 0;
-        for (Node x = first; x != null && numberOfNodes <= n; x = x.next) {
+        for (Node<Item> x = first; x != null && numberOfNodes <= n; x = x.next) {
             numberOfNodes++;
         }
         if (numberOfNodes != n) return false;
