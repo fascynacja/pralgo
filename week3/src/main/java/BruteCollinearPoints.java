@@ -68,7 +68,7 @@ public class BruteCollinearPoints {
                         Point p4 = points[n];
                         if (i != j && i != k && i != n && j != k && j != n && k != n) {
                             double p1slopeToP2 = p1.slopeTo(p2);
-                            if (p1slopeToP2 == p1.slopeTo(p3) && p1slopeToP2 == p1.slopeTo(p4)) {
+                            if (Double.compare(p1slopeToP2 ,p1.slopeTo(p3))==0 && Double.compare(p1slopeToP2 , p1.slopeTo(p4))==0) {
                                 if (p1.compareTo(p2) == -1 && p2.compareTo(p3) == -1 && p3.compareTo(p4) == -1) {
                                     createSegment(p1, p4);
                                 }
